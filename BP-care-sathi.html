@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BP केयर साथी</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDF3F2;--ink:#1E2A5A;--soft:#5B6690;--hib:#B4304A;--beet:#7A2E5D;
+--leaf:#3E7C4F;--card:#fff;--line:#F0D8DA;--warn:#B4552E;--danger:#A3242E}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Hind',system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding:14px 12px 24px}
+header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;margin-bottom:12px}
+.brand{font-family:'Rozha One',serif;font-size:27px}
+.brand b{color:var(--hib);font-weight:400}
+.date{font-size:17px;color:var(--soft);margin-left:8px}
+#saveNote{font-size:15px;color:var(--leaf);min-width:70px;text-align:right}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1.15fr}}
+.box{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:14px}
+h2{font-family:'Rozha One',serif;font-size:20px;font-weight:400;margin-bottom:10px}
+.chips{display:flex;gap:8px}
+.chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;
+background:var(--card);border:3px solid var(--line);border-radius:16px;cursor:pointer;
+font-family:inherit;color:var(--ink)}
+.chip.done{background:#F2F8F3;border-color:var(--leaf)}
+.chip .lbl{font-family:'Rozha One',serif;font-size:15.5px;line-height:1.3;text-align:center}
+.chip .st{font-size:14px;font-weight:700;color:var(--soft)}
+.chip.done .st{color:var(--leaf)}
+.cup{position:relative;width:38px;height:38px}
+.cup .bowl{position:absolute;inset:6px 4px 4px 4px;border:2.5px solid var(--ink);border-top:none;
+border-radius:0 0 14px 14px;overflow:hidden;background:#fff}
+.cup .fill{position:absolute;left:0;right:0;bottom:0;height:0;transition:height .4s ease}
+.chip.done .fill{height:82%}
+.cup .handle{position:absolute;right:-1px;top:13px;width:10px;height:12px;
+border:2.5px solid var(--ink);border-left:none;border-radius:0 8px 8px 0}
+.bprow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bprow span.t{font-size:17px;font-weight:600;width:46px}
+.bprow input{width:70px;font-size:21px;font-family:'Hind',sans-serif;font-weight:600;padding:7px 4px;
+text-align:center;color:var(--ink);border:2.5px solid var(--line);border-radius:11px;background:#fff}
+.bprow .sl{font-size:21px;color:var(--soft)}
+input:focus,button:focus-visible{outline:3px solid #B4304A55;outline-offset:2px}
+#status{display:none;padding:8px 12px;border-radius:11px;margin-top:6px;font-size:16.5px;font-weight:600;border:2px solid}
+#chartBox{width:100%;height:230px}
+.legend{font-size:13.5px;color:var(--soft);margin-top:4px}
+.bars{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.bars button{flex:1;min-width:180px;border-radius:14px;padding:10px 14px;cursor:pointer;
+font-family:'Rozha One',serif;font-size:16.5px}
+#recipeBtn{background:var(--card);border:2.5px solid var(--line);color:var(--ink)}
+#cautionBtn{background:#FFF4E8;border:2.5px solid var(--warn);color:#6B3A1E}
+.pop{display:none;margin-top:10px;font-size:17px;line-height:1.65}
+.pop.show{display:block}
+#cautionPop{background:#FFF4E8;border-color:var(--warn);color:#6B3A1E}
+.resetRow{text-align:center;margin-top:14px}
+#resetBtn{background:none;border:2px solid var(--line);border-radius:10px;color:var(--soft);
+font-size:13.5px;padding:6px 12px;cursor:pointer;font-family:'Hind',sans-serif}
+.empty{font-size:16px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><b>BP</b> केयर साथी <span class="date" id="dateLbl"></span></div>
+    <div id="saveNote"></div>
+  </header>
+
+  <div class="grid">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <section class="box">
+        <h2 id="taskHead">आज का काम (0/3)</h2>
+        <div class="chips">
+          <button class="chip" id="c_tm">
+            <span class="cup"><span class="bowl"><span class="fill" style="background:var(--hib)"></span></span><span class="handle"></span></span>
+            <span class="lbl">सुबह की<br>गुड़हल चाय</span><span class="st">बाकी</span>
+          </button>
+          <button class="chip" id="c_te">
+            <span class="cup"><span class="bowl"><span class="fill" style="background:var(--hib)"></span></span><span class="handle"></span></span>
+            <span class="lbl">शाम की<br>गुड़हल चाय</span><span class="st">बाकी</span>
+          </button>
+          <button class="chip" id="c_beet">
+            <span class="cup"><span class="bowl"><span class="fill" style="background:var(--beet)"></span></span><span class="handle"></span></span>
+            <span class="lbl">चुकंदर<br>का जूस</span><span class="st">बाकी</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>आज का BP</h2>
+        <div class="bprow"><span class="t">सुबह</span>
+          <input id="ms" type="number" inputmode="numeric" placeholder="ऊपर" aria-label="सुबह systolic">
+          <span class="sl">/</span>
+          <input id="md" type="number" inputmode="numeric" placeholder="नीचे" aria-label="सुबह diastolic">
+        </div>
+        <div class="bprow"><span class="t">शाम</span>
+          <input id="es" type="number" inputmode="numeric" placeholder="ऊपर" aria-label="शाम systolic">
+          <span class="sl">/</span>
+          <input id="ed" type="number" inputmode="numeric" placeholder="नीचे" aria-label="शाम diastolic">
+        </div>
+        <div id="status"></div>
+      </section>
+    </div>
+
+    <section class="box">
+      <h2>पिछले 14 दिन का BP</h2>
+      <div id="chartBox"><p class="empty">दो दिन का BP लिखने पर graph दिखेगा।</p></div>
+      <div class="legend"><span style="color:var(--hib);font-weight:700">—</span> ऊपर वाला &nbsp;
+      <span style="color:var(--beet);font-weight:700">—</span> नीचे वाला &nbsp;•&nbsp; बिंदीदार रेखा = 140/90 सीमा</div>
+    </section>
+  </div>
+
+  <div class="bars">
+    <button id="recipeBtn">चाय की विधि ▼</button>
+    <button id="cautionBtn">⚠ दवा के साथ ज़रूरी बात ▼</button>
+  </div>
+  <div class="box pop" id="recipePop">
+    2 कप पानी उबालें → 1–2 चम्मच सूखी गुड़हल डालें → ढककर 5–10 मिनट रखें → छान लें।
+    चीनी बिल्कुल नहीं (स्टीविया चलेगी)। दिन में 2 कप — सुबह और शाम। शुद्ध, बिना मिलावट वाली गुड़हल लें।
+  </div>
+  <div class="box pop" id="cautionPop">
+    गुड़हल चाय और चुकंदर जूस दोनों BP कम करते हैं। BP की दवा चल रही हो तो यह routine शुरू करने से
+    पहले डॉक्टर को ज़रूर बताएँ — साथ में BP ज़्यादा नीचे जा सकता है। दवा अपने आप बंद न करें।
+    यह app डॉक्टर की सलाह का विकल्प नहीं है।
+  </div>
+
+  <div class="resetRow"><button id="resetBtn">सारा record मिटाएँ</button></div>
+</div>
+
+<script>
+"use strict";
+var KEY="bpcare_days";
+function todayKey(){var d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function hindiDate(){var d=new Date();
+  var din=["रवि","सोम","मंगल","बुध","गुरु","शुक्र","शनि"][d.getDay()];
+  var mah=["जनवरी","फ़रवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"][d.getMonth()];
+  return din+", "+d.getDate()+" "+mah;}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return{};}}
+function save(days){try{localStorage.setItem(KEY,JSON.stringify(days));
+  note("save ✓");}catch(e){note("save नहीं हुआ");}}
+function note(t){var n=document.getElementById("saveNote");n.textContent=t;
+  clearTimeout(note._t);note._t=setTimeout(function(){n.textContent="";},1200);}
+
+var days=load(), tk=todayKey();
+if(!days[tk])days[tk]={tm:false,te:false,beet:false,ms:"",md:"",es:"",ed:""};
+var today=days[tk];
+document.getElementById("dateLbl").textContent=hindiDate();
+
+/* tasks */
+var chips={tm:"c_tm",te:"c_te",beet:"c_beet"};
+function renderTasks(){
+  var n=0;
+  Object.keys(chips).forEach(function(k){
+    var el=document.getElementById(chips[k]);
+    el.classList.toggle("done",!!today[k]);
+    el.querySelector(".st").textContent=today[k]?"✓ हो गया":"बाकी";
+    if(today[k])n++;
+  });
+  document.getElementById("taskHead").textContent=
+    n===3?"आज का काम — पूरा! 🎉":"आज का काम ("+n+"/3)";
+}
+Object.keys(chips).forEach(function(k){
+  document.getElementById(chips[k]).addEventListener("click",function(){
+    today[k]=!today[k];save(days);renderTasks();
+  });
+});
+
+/* BP inputs */
+["ms","md","es","ed"].forEach(function(id){
+  var inp=document.getElementById(id);
+  inp.value=today[id]||"";
+  inp.addEventListener("input",function(){
+    today[id]=inp.value;save(days);renderStatus();renderChart();
+  });
+});
+function renderStatus(){
+  var rs=[];
+  if(today.ms&&today.md)rs.push([+today.ms,+today.md]);
+  if(today.es&&today.ed)rs.push([+today.es,+today.ed]);
+  var el=document.getElementById("status");
+  if(!rs.length){el.style.display="none";return;}
+  var hiS=Math.max.apply(null,rs.map(function(r){return r[0]}));
+  var hiD=Math.max.apply(null,rs.map(function(r){return r[1]}));
+  var loS=Math.min.apply(null,rs.map(function(r){return r[0]}));
+  var loD=Math.min.apply(null,rs.map(function(r){return r[1]}));
+  var c,t;
+  if(hiS>=180||hiD>=120){c="var(--danger)";t="बहुत ज़्यादा — तुरंत डॉक्टर से संपर्क करें";}
+  else if(loS<90||loD<60){c="var(--warn)";t="कम है — चक्कर लगे तो चाय/जूस रोकें, डॉक्टर से पूछें";}
+  else if(hiS>=140||hiD>=90){c="var(--warn)";t="ज़्यादा है — दवा समय पर, नमक कम";}
+  else if(hiS>=120){c="var(--soft)";t="थोड़ा बढ़ा हुआ — आदत जारी रखें";}
+  else{c="var(--leaf)";t="सामान्य है — बहुत बढ़िया!";}
+  el.style.display="block";el.style.borderColor=c;el.style.color=c;
+  el.style.background="color-mix(in srgb, "+c+" 10%, white)";el.textContent=t;
+}
+
+/* chart: dependency-free SVG */
+function renderChart(){
+  var keys=Object.keys(days).sort().slice(-14);
+  var data=keys.map(function(k){
+    var d=days[k];
+    var sys=d.ms&&d.es?Math.round((+d.ms+ +d.es)/2):(+(d.ms||d.es)||null);
+    var dia=d.md&&d.ed?Math.round((+d.md+ +d.ed)/2):(+(d.md||d.ed)||null);
+    return{lbl:k.slice(8),sys:sys,dia:dia};
+  }).filter(function(r){return r.sys||r.dia;});
+  var box=document.getElementById("chartBox");
+  if(data.length<2){box.innerHTML='<p class="empty">दो दिन का BP लिखने पर graph दिखेगा।</p>';return;}
+  var W=box.clientWidth||500,H=230,L=34,R=8,T=10,B=26;
+  var y=function(v){return T+(200-v)/(200-50)*(H-T-B);};
+  var x=function(i){return L+(data.length===1?0:i*(W-L-R)/(data.length-1));};
+  var s='<svg width="100%" height="'+H+'" viewBox="0 0 '+W+' '+H+'">';
+  [60,90,120,150,180].forEach(function(g){
+    s+='<line x1="'+L+'" y1="'+y(g)+'" x2="'+(W-R)+'" y2="'+y(g)+'" stroke="#F0D8DA" stroke-dasharray="4 4"/>';
+    s+='<text x="4" y="'+(y(g)+4)+'" font-size="12" fill="#5B6690">'+g+'</text>';
+  });
+  [140,90].forEach(function(g){
+    s+='<line x1="'+L+'" y1="'+y(g)+'" x2="'+(W-R)+'" y2="'+y(g)+'" stroke="#B4552E" stroke-dasharray="6 4"/>';
+  });
+  function path(field){
+    var p="";
+    data.forEach(function(r,i){ if(r[field]!=null){p+=(p?" L":"M")+" "+x(i)+" "+y(r[field]);} });
+    return p;
+  }
+  s+='<path d="'+path("sys")+'" fill="none" stroke="#B4304A" stroke-width="3"/>';
+  s+='<path d="'+path("dia")+'" fill="none" stroke="#7A2E5D" stroke-width="3"/>';
+  data.forEach(function(r,i){
+    if(r.sys!=null)s+='<circle cx="'+x(i)+'" cy="'+y(r.sys)+'" r="4.5" fill="#B4304A"/>';
+    if(r.dia!=null)s+='<circle cx="'+x(i)+'" cy="'+y(r.dia)+'" r="4.5" fill="#7A2E5D"/>';
+    s+='<text x="'+x(i)+'" y="'+(H-8)+'" font-size="12" fill="#5B6690" text-anchor="middle">'+r.lbl+'</text>';
+  });
+  s+='</svg>';
+  box.innerHTML=s;
+}
+window.addEventListener("resize",renderChart);
+
+/* pops */
+function bindPop(btnId,popId,arrowBase){
+  var b=document.getElementById(btnId),p=document.getElementById(popId);
+  b.addEventListener("click",function(){
+    var open=p.classList.toggle("show");
+    b.textContent=arrowBase+(open?" ▲":" ▼");
+  });
+}
+bindPop("recipeBtn","recipePop","चाय की विधि");
+bindPop("cautionBtn","cautionPop","⚠ दवा के साथ ज़रूरी बात");
+
+/* reset */
+document.getElementById("resetBtn").addEventListener("click",function(){
+  if(!confirm("सारा पुराना record मिटाना है?"))return;
+  localStorage.removeItem(KEY);
+  days={};days[todayKey()]={tm:false,te:false,beet:false,ms:"",md:"",es:"",ed:""};
+  today=days[todayKey()];
+  ["ms","md","es","ed"].forEach(function(id){document.getElementById(id).value="";});
+  renderTasks();renderStatus();renderChart();
+});
+
+renderTasks();renderStatus();renderChart();
+</script>
+</body>
+</html>

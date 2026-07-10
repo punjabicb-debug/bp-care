@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hibiscus & BP — Kaise Kaam Karta Hai</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FDF3F2;--ink:#1E2A5A;--soft:#5B6690;--hib:#B4304A;--leaf:#3E7C4F;
+--card:#fff;--line:#F0D8DA;--warn:#B4552E;--sky:#2f6f8f}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Hind',system-ui,sans-serif;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:16px 14px 30px}
+header{text-align:center;margin-bottom:18px}
+.brand{font-family:'Rozha One',serif;font-size:30px}
+.brand b{color:var(--hib);font-weight:400}
+.tag{font-size:16px;color:var(--soft);margin-top:2px}
+.src{font-size:13px;color:var(--soft);margin-top:4px}
+h2{font-family:'Rozha One',serif;font-size:22px;font-weight:400;margin:0 0 12px}
+.box{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px}
+/* tracker */
+.chips{display:flex;gap:10px}
+.chip{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;
+background:var(--card);border:3px solid var(--line);border-radius:16px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.chip.done{background:#F8EEF0;border-color:var(--hib)}
+.chip .lbl{font-family:'Rozha One',serif;font-size:16px;text-align:center;line-height:1.25}
+.chip .st{font-size:14px;font-weight:700;color:var(--soft)}
+.chip.done .st{color:var(--hib)}
+.cup{position:relative;width:40px;height:40px}
+.cup .bowl{position:absolute;inset:6px 4px 4px 4px;border:2.5px solid var(--ink);border-top:none;
+border-radius:0 0 15px 15px;overflow:hidden;background:#fff}
+.cup .fill{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--hib);transition:height .4s ease}
+.chip.done .fill{height:82%}
+.cup .handle{position:absolute;right:-1px;top:14px;width:11px;height:13px;border:2.5px solid var(--ink);border-left:none;border-radius:0 9px 9px 0}
+.streak{font-size:15px;color:var(--soft);margin-top:10px;text-align:center}
+.streak b{color:var(--hib)}
+/* mechanisms */
+.mech{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.mech:last-child{border-bottom:none}
+.ic{flex-shrink:0;width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.ic svg{width:30px;height:30px}
+.mech h3{font-family:'Hind',sans-serif;font-size:18px;font-weight:700;margin:0 0 3px}
+.mech p{font-size:16px;color:var(--soft);margin:0}
+.mech .en{font-size:14.5px;color:var(--ink);opacity:.75;margin-top:3px}
+/* tips */
+.tip{display:flex;gap:10px;font-size:16px;margin-bottom:10px}
+.tip:last-child{margin-bottom:0}
+.tip .b{color:var(--leaf);font-weight:700;flex-shrink:0}
+.warnbox{background:#FFF4E8;border:2.5px solid var(--warn);border-radius:16px;padding:14px 16px;font-size:16px;line-height:1.6;color:#6B3A1E}
+.foot{text-align:center;font-size:13px;color:var(--soft);margin-top:8px}
+
+.acc{background:var(--card);border:3px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;
+background:none;border:none;cursor:pointer;padding:16px;font-family:'Rozha One',serif;
+font-size:21px;color:var(--ink);text-align:left}
+.acc-btn .arw{font-size:16px;color:var(--soft);transition:transform .25s ease;flex-shrink:0}
+.acc.open .acc-btn .arw{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc.open .acc-body{max-height:1600px}
+.acc-inner{padding:0 16px 16px}
+.acc.warn{border-color:var(--warn)}
+.acc.warn .acc-btn{color:#6B3A1E}
+@media(prefers-reduced-motion:reduce){.acc-body,.acc-btn .arw{transition:none}}
+button:focus-visible{outline:3px solid #B4304A55;outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><b>Hibiscus</b> & Blood Pressure</div>
+    <div class="tag">Gudhal chai BP ke liye kaise madad karti hai</div>
+    <div class="src">Source: Dr. Adam J. Story, DC · educational only</div>
+  </header>
+
+  <!-- TRACKER -->
+  <section class="box">
+    <h2>Aaj ki 2 cup 🌺</h2>
+    <div class="chips">
+      <button class="chip" id="c1">
+        <span class="cup"><span class="bowl"><span class="fill"></span></span><span class="handle"></span></span>
+        <span class="lbl">Cup 1</span><span class="st">baaki</span>
+      </button>
+      <button class="chip" id="c2">
+        <span class="cup"><span class="bowl"><span class="fill"></span></span><span class="handle"></span></span>
+        <span class="lbl">Cup 2<br><span style="font-weight:400;font-size:13px;color:var(--soft)">(shaam, caffeine-free)</span></span><span class="st">baaki</span>
+      </button>
+    </div>
+    <div class="streak" id="streak"></div>
+  </section>
+
+  <!-- MECHANISMS -->
+  <div class="acc" id="acc1">
+    <button class="acc-btn" data-acc="acc1">Yeh kaam kaise karti hai — 4 tareeke <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+
+    <div class="mech">
+      <div class="ic" style="background:#E9F3EC">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3E7C4F" stroke-width="2" stroke-linecap="round"><path d="M4 12h4l2-3 3 6 2-3h5"/></svg>
+      </div>
+      <div>
+        <h3>1. Vasodilation — naliyan khulti hain</h3>
+        <p>Nitric oxide banata hai, jisse blood vessels khul kar lachile (pliable) hote hain.</p>
+        <div class="en">Promotes nitric oxide → vessels widen & become more pliable.</div>
+      </div>
+    </div>
+
+    <div class="mech">
+      <div class="ic" style="background:#E7F0F7">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2f6f8f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>
+      </div>
+      <div>
+        <h3>2. Diuretic — extra paani/namak bahar</h3>
+        <p>Natural diuretic ki tarah kaam karke shareer se atirikt sodium nikalti hai.</p>
+        <div class="en">Acts as a natural diuretic → helps lower pressure.</div>
+      </div>
+    </div>
+
+    <div class="mech">
+      <div class="ic" style="background:#F8EEF0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B4304A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m8 6 3 3"/><path d="M6 10V6h4"/><circle cx="16" cy="16" r="3"/></svg>
+      </div>
+      <div>
+        <h3>3. Natural ACE inhibitor</h3>
+        <p>Angiotensin II (jo naliyan sankuchit karta hai) banne se rokti hai — waise hi jaise BP ki kuch dawaiyan.</p>
+        <div class="en">Blocks angiotensin II, the hormone that narrows vessels.</div>
+      </div>
+    </div>
+
+    <div class="mech">
+      <div class="ic" style="background:#FDEEE9">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#B4552E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 8h10c0-3 2-5 2-8a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg>
+      </div>
+      <div>
+        <h3>4. Anti-inflammatory — naliyan naram rahein</h3>
+        <p>Chronic inflammation kam karke dhamniyon (arteries) ko samay ke saath sakht hone se bachati hai.</p>
+        <div class="en">Reduces chronic inflammation → prevents artery stiffening over time.</div>
+      </div>
+    </div>
+    </div></div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="acc" id="acc2">
+    <button class="acc-btn" data-acc="acc2">Practical tips <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+    <div class="tip"><span class="b">•</span><span><b>Do cup roz:</b> research kehti hai din mein 2 cup se systolic aur diastolic dono mein achhi kami aati hai.</span></div>
+    <div class="tip"><span class="b">•</span><span><b>Shaam ke liye acchi:</b> zyadatar hibiscus chai caffeine-free hoti hai, isliye raat ko relax karne wala drink ban sakti hai. <b>Label zaroor check karein</b> ki added caffeine na ho.</span></div>
+    <div class="tip"><span class="b">•</span><span><b>Kidney:</b> aam taur par kidney ke liye safe maani jaati hai, aur kuch CKD wale log bhi BP ke liye istemal karte hain — par apne doctor se confirm karke hi shuru karein.</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc warn" id="acc3">
+    <button class="acc-btn" data-acc="acc3">⚠ Zaroori — disclaimer <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+      <div style="font-size:16px;line-height:1.6;color:#6B3A1E">
+        Yeh jaankari sirf educational hai — kisi doctor ki salah, jaanch ya ilaaj ka vikalp nahi. Agar BP ki dawa chal rahi ho ya kidney ki koi samasya ho, toh hibiscus chai shuru karne se pehle apne physician se zaroor baat karein. Dawa apne aap band ya kam na karein.
+      </div>
+    </div></div>
+  </div>
+  <div class="foot" id="reset-wrap"><button id="reset" style="background:none;border:2px solid var(--line);border-radius:10px;color:var(--soft);font-size:13px;padding:6px 12px;cursor:pointer;font-family:'Hind',sans-serif">record reset</button></div>
+</div>
+
+<script>
+"use strict";
+var KEY="hibiscus_days";
+function tk(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return{};}}
+function saveAll(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+var days=load(); if(!days[tk()])days[tk()]={c1:false,c2:false};
+var today=days[tk()];
+
+function streakCount(){
+  var n=0,d=new Date();
+  for(var i=0;i<400;i++){
+    var k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    var r=days[k];
+    if(r&&r.c1&&r.c2){n++;}else if(i>0){break;}else{ /* aaj adhoora: aage check */ }
+    d.setDate(d.getDate()-1);
+  }
+  return n;
+}
+function render(){
+  [["c1","c1"],["c2","c2"]].forEach(function(p){
+    var el=document.getElementById(p[0]);
+    el.classList.toggle("done",!!today[p[1]]);
+    el.querySelector(".st").textContent=today[p[1]]?"✓ done":"baaki";
+  });
+  var s=document.getElementById("streak");
+  var both=today.c1&&today.c2;
+  var st=streakCount();
+  if(both&&st>0){s.innerHTML="🔥 <b>"+st+"</b> din se dono cup — shaandaar!";}
+  else if(today.c1||today.c2){s.innerHTML="Ek cup ho gaya, ek baaki 🌺";}
+  else{s.innerHTML="Aaj ki pehli cup tick karein 🌺";}
+}
+["c1","c2"].forEach(function(k){
+  document.getElementById(k).addEventListener("click",function(){
+    today[k]=!today[k];days[tk()]=today;saveAll(days);render();
+  });
+});
+Array.prototype.forEach.call(document.querySelectorAll(".acc-btn"),function(btn){
+  btn.addEventListener("click",function(){
+    document.getElementById(btn.getAttribute("data-acc")).classList.toggle("open");
+  });
+});
+document.getElementById("reset").addEventListener("click",function(){
+  if(!confirm("Saara record mitaana hai?"))return;
+  localStorage.removeItem(KEY);days={};days[tk()]={c1:false,c2:false};today=days[tk()];render();
+});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harsingar / Parijat — Parampara aur Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4EC;--ink:#1E2A5A;--soft:#6B6480;--flame:#D95A20;--deep:#A8391B;
+--card:#fff;--line:#F3DCC9;--warn:#B4552E;--leaf:#3E7C4F}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Hind',system-ui,sans-serif;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:16px 14px 28px}
+header{text-align:center;margin-bottom:16px}
+.brand{font-family:'Rozha One',serif;font-size:30px}
+.brand b{color:var(--flame);font-weight:400}
+.tag{font-size:16px;color:var(--soft);margin-top:2px}
+.src{font-size:12.5px;color:var(--soft);margin-top:4px}
+/* honesty banner — the heart of this app */
+.honest{background:#FFF9F2;border:3px solid var(--flame);border-radius:18px;padding:15px 16px;margin-bottom:14px}
+.honest h2{font-family:'Rozha One',serif;font-size:20px;font-weight:400;margin:0 0 6px;color:var(--deep)}
+.honest p{font-size:15.5px;color:#7A4A2E;margin:0}
+.acc{background:var(--card);border:3px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;
+background:none;border:none;cursor:pointer;padding:16px;font-family:'Rozha One',serif;
+font-size:20px;color:var(--ink);text-align:left}
+.acc-btn .arw{font-size:15px;color:var(--soft);transition:transform .25s ease;flex-shrink:0}
+.acc.open .acc-btn .arw{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc.open .acc-body{max-height:2600px}
+.acc-inner{padding:0 16px 16px}
+.acc.warn{border-color:var(--warn)}
+.acc.warn .acc-btn{color:#6B3A1E}
+.row{padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.row h3{font-family:'Hind',sans-serif;font-size:17px;font-weight:700;margin:0 0 3px;
+display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.row p{font-size:15.5px;color:var(--soft);margin:0}
+.badge{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.3px}
+.b-human{background:#E4F1E8;color:#2C6740}
+.b-animal{background:#FFF0DE;color:#8A5A1E}
+.b-lab{background:#EFEAF6;color:#5A3E82}
+.b-trad{background:#FCE8E2;color:#A8391B}
+.legend{font-size:13.5px;color:var(--soft);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);line-height:1.9}
+.keyline{font-size:14.5px;color:#7A4A2E;background:#FFF9F2;border-radius:12px;padding:10px 12px;margin-top:12px}
+.tip{display:flex;gap:9px;font-size:15.5px;margin-bottom:9px}
+.tip:last-child{margin-bottom:0}
+.tip .b{color:var(--flame);font-weight:700;flex-shrink:0}
+.chem{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.chem span{background:#FFF1E6;border:1.5px solid var(--line);border-radius:20px;
+padding:4px 11px;font-size:13.5px;font-weight:600;color:var(--deep)}
+button:focus-visible{outline:3px solid #D95A2055;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><b>हरसिंगार</b> / पारिजात</div>
+    <div class="tag">Nyctanthes arbor-tristis — Night Jasmine</div>
+    <div class="src">Parampara aur research · sirf jaankari ke liye</div>
+  </header>
+
+  <div class="honest">
+    <h2>Pehle ek imaandar baat</h2>
+    <p>Harsingar par baaki phoolon se <b>thodi zyada manav-research</b> hui hai — khaaskar
+    jodon ke dard (arthritis), bukhaar aur dengue mein platelet ke liye. Phir bhi iski
+    <b>koi tay-shuda "roz ki chai" wali surakshit dose sthapit nahi</b> hai. Isliye is app
+    mein bhi koi daily tracker nahi — yeh sirf batati hai ki parampara aur vigyan kya kehte hain.</p>
+  </div>
+
+  <div class="acc" id="acc1">
+    <button class="acc-btn" data-acc="acc1">Research kya kehti hai <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+
+      <div class="row">
+        <h3>Jodon ka dard — arthritis <span class="badge b-trad">parampara</span> <span class="badge b-human">human</span></h3>
+        <p>Harsingar ke patton ka kaadha sciatica aur gathiya (arthritis) ke liye Ayurved mein
+        sabse mashhoor upyog hai. Kuch chhote manav-adhyayanon mein dard aur soojan kam hone ke
+        sanket mile — par bade, pukhta trials abhi kam hain.</p>
+      </div>
+
+      <div class="row">
+        <h3>Bukhaar aur dengue platelet <span class="badge b-animal">animal</span> <span class="badge b-human">human</span></h3>
+        <p>Patton ke ras ka upyog paramparik roop se bukhaar mein hota hai. Kuch chhote
+        adhyayanon mein dengue ke mareezon mein platelet count sudharne ke sanket mile —
+        <b>yeh abhi pukhta siddh nahi</b>, doctor ke ilaaj ka vikalp bilkul nahi.</p>
+      </div>
+
+      <div class="row">
+        <h3>Soojan aur antioxidant <span class="badge b-animal">animal</span> <span class="badge b-lab">lab</span></h3>
+        <p>Patton aur phoolon ke extract mein anti-inflammatory aur free-radical se bachav wala
+        asar — jaanwaron aur lab mein lagataar milta hai.</p>
+      </div>
+
+      <div class="row">
+        <h3>Sugar (blood glucose) <span class="badge b-animal">animal</span></h3>
+        <p>Chuhon par extract ne khoon ki shakkar kam ki (hypoglycemic asar).
+        <b>Insaanon par yeh siddh nahi hua.</b></p>
+      </div>
+
+      <div class="row">
+        <h3>Anti-malarial / anti-parasitic <span class="badge b-lab">lab</span> <span class="badge b-animal">animal</span></h3>
+        <p>Test-tube aur chuhon mein malaria ke parjeevi ke khilaf asar mila hai.</p>
+      </div>
+
+      <div class="row">
+        <h3>Anti-microbial / anti-fungal <span class="badge b-lab">lab</span></h3>
+        <p>Kuch bacteria aur fungus ke khilaf test-tube mein asar.</p>
+      </div>
+
+      <div class="legend">
+        <b>Badge ka matlab:</b><br>
+        <span class="badge b-human">human</span> insaanon par (chhote adhyayan) &nbsp;
+        <span class="badge b-animal">animal</span> sirf chuhon/jaanwaron par &nbsp;
+        <span class="badge b-lab">lab</span> sirf test-tube mein &nbsp;
+        <span class="badge b-trad">parampara</span> paramparik gyaan
+      </div>
+
+      <div class="keyline">Dhyan dein: yahan kuch <b>"human" badge</b> hain, lekin ve
+      <b>chhote adhyayan</b> hain — bade clinical trial abhi bhi kam hain. Isliye "sanket hai"
+      aur "siddh ho gaya" — in dono mein farak zaroori hai.</div>
+    </div></div>
+  </div>
+
+  <div class="acc" id="acc2">
+    <button class="acc-btn" data-acc="acc2">Phool aur patton mein kya hai (compounds) <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+      <p style="font-size:15.5px;color:var(--soft)">Harsingar mein mukhya roop se
+      <b>iridoid glycosides</b> aur flavonoids hote hain — yahi iske asar ke peechhe hain:</p>
+      <div class="chem">
+        <span>Arbortristoside A</span><span>Arbortristoside B</span>
+        <span>Nyctanthic acid</span><span>β-sitosterol</span>
+        <span>Nyctanthin</span><span>Iridoid glycosides</span><span>Flavonoids</span>
+      </div>
+      <p style="font-size:14.5px;color:var(--soft);margin-top:10px">Inhi mein se
+      <b>arbortristoside</b> par sabse zyada shodh hua hai — mukhya roop se soojan,
+      bukhaar aur parjeevi ke liye. Naarangi rang ke danthal (calyx) se paramparik peela-kesari
+      rang bhi banta hai.</p>
+    </div></div>
+  </div>
+
+  <div class="acc" id="acc3">
+    <button class="acc-btn" data-acc="acc3">Parampara aur kathayein <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+      <div class="tip"><span class="b">🌙</span><span><b>Raat ki rani ka bhai:</b> Harsingar ke phool
+      <b>raat mein khilte</b> hain aur subah tak jhad jaate hain — isi liye "arbor-tristis"
+      yaani "udaas ped". Khushbu poori raat faili rehti hai.</span></div>
+      <div class="tip"><span class="b">🕉</span><span><b>Pauranik katha:</b> Parijat ko
+      swarg ka vriksh mana jata hai — samudra manthan se nikla. Krishna-Satyabhama ki katha
+      isi phool se judi hai.</span></div>
+      <div class="tip"><span class="b">🎨</span><span><b>Kesari rang:</b> Phool ke naarangi danthal
+      se paramparik peela rang banta hai — kabhi reshmi kapdon ki rangaai mein upyog hota tha.</span></div>
+      <div class="tip"><span class="b">🌳</span><span>Poore Bharat mein aam — mandir, aangan aur
+      bageechon mein. West Bengal ka rajya-pushp bhi hai.</span></div>
+    </div></div>
+  </div>
+
+  <div class="acc warn" id="acc4">
+    <button class="acc-btn" data-acc="acc4">⚠ Zaroori — kripya padhein <span class="arw">▼</span></button>
+    <div class="acc-body"><div class="acc-inner">
+      <div style="font-size:15.5px;line-height:1.65;color:#6B3A1E">
+        Yeh app <b>sirf jaankari</b> ke liye hai — doctor ki salah, jaanch ya ilaaj ka vikalp nahi.<br><br>
+        • Harsingar ki <b>surakshit roz ki maatra insaanon ke liye tay nahi</b> hai. Apne mann se
+        rozana kaadha ya ras shuru na karein.<br>
+        • <b>Dengue ya tez bukhaar</b> mein Harsingar ko doctor ke ilaaj ka vikalp <b>bilkul na samjhein</b> —
+        platelet girna jaanleva ho sakta hai, turant doctor ke paas jaayein.<br>
+        • Sugar, BP ya koi bhi dawa chal rahi ho — to Harsingar bilkul na lein jab tak
+        <b>doctor ya yogya vaidya</b> se salah na le lein (sugar ki dawa ke saath shakkar zyada gir sakti hai).<br>
+        • Garbhavastha, stanpaan, ya bachchon ko dena ho — to bina vaidya ki salah ke nahi.
+      </div>
+    </div></div>
+  </div>
+
+  <p style="text-align:center;font-size:12.5px;color:var(--soft);margin-top:6px">
+    Sources: Journal of Ethnopharmacology · Nyctanthes arbor-tristis pharmacology reviews · Ayurvedic pharmacopoeia
+  </p>
+</div>
+
+<script>
+"use strict";
+Array.prototype.forEach.call(document.querySelectorAll(".acc-btn"),function(btn){
+  btn.addEventListener("click",function(){
+    document.getElementById(btn.getAttribute("data-acc")).classList.toggle("open");
+  });
+});
+</script>
+</body>
+</html>
